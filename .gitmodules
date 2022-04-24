@@ -1,0 +1,3 @@
+[submodule "zathura-pdf-poppler"]
+	path = zathura-pdf-poppler
+	url = https://github.com/pwmt/zathura-pdf-poppler
