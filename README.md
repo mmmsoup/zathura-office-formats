@@ -2,6 +2,11 @@
 
 a zathura plugin inspired by [zaread](https://github.com/paoloap/zaread) to view .docx and other file formats in zathura. Uses libreoffice to convert files to pdfs and then poppler to render them (shamelessly reusing pretty much all of the code in [zathura-pdf-poppler](https://github.com/pwmt/zathura-pdf-poppler)). Converted files are cached in `~/.cache/zathura-office-formats` as it takes a little while to convert the files to pdfs.
 
+## supported file types
+- OpenDocument (.odt, .odp, .ods)
+- old MS Office (.doc, .xls, .ppt)
+- new MS Office (Office Open XML) (.docx, .xlsx, .pptx)
+
 ## dependencies
 - libreoffice
 - poppler
