@@ -81,10 +81,18 @@ zathura_error_t officeDocOpen(zathura_document_t *doc) {
 	char outputPath[strlen(opFormat)-2*2+strlen(pdfDir)+MD5_LEN+1];
 	sprintf(outputPath, opFormat, pdfDir, md5);
 
-	struct stat statbuf;
-	if (stat(outputPath, &statbuf) == 0) {
-		printf("using cached pdf file for %s\n", inputPath);
-	} else {
+	// check if cached file exists
+	int createPdf = 1;
+	struct stat outputStat;
+	if (stat(outputPath, &outputStat) == 0) {
+		// check if input file was modified after file was cached
+		struct stat inputStat;
+		if (stat(inputPath, &inputStat) != 0) return ZATHURA_ERROR_UNKNOWN;
+
+		if (inputStat.st_mtim.tv_sec <= outputStat.st_mtim.tv_sec) createPdf = 0;
+	}
+
+	if (createPdf) {
 		const char *cmdFormat = "libreoffice --convert-to pdf \"%s\" --outdir \"%s\" && mv \"%s/$(ls -t \"%s\" | head -1)\" \"%s\"";
 		char cmd[strlen(cmdFormat)-2*4+strlen(inputPath)+strlen(tmpDir)*3+strlen(outputPath)+1];
 		sprintf(cmd, cmdFormat, inputPath, tmpDir, tmpDir, tmpDir, outputPath);

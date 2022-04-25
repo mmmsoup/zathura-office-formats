@@ -29,9 +29,11 @@ clean:
 
 install: build/lib$(PLUGIN_NAME).so
 	cp build/lib$(PLUGIN_NAME).so /usr/lib/zathura
+	cp zathura-office-formats.desktop /usr/share/applications
 
 uninstall:
 	rm /usr/lib/zathura/lib$(PLUGIN_NAME).so
+	rm /usr/share/applications/zathura-office-formats.desktop
 
 decache:
 	rm -r $(PDF_DIR)

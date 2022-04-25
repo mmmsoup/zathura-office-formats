@@ -4,6 +4,7 @@ a zathura plugin inspired by [zaread](https://github.com/paoloap/zaread) to view
 
 ## dependencies
 - libreoffice
+- poppler
 - zathura
 
 ## install
